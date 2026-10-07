@@ -1,5 +1,6 @@
 import type { FormEvent } from "react"
 import styles from "../styles/filterModal.module.css"
+import FilterModalRange from "./FilterModalRange"
 
 interface FilterModalProps {
     toggleFilter: () => void
@@ -72,83 +73,21 @@ function FilterModal({
                 </header>
 
                 <main>
-                    <section className={styles.containerRange}>
-                        <div
-                            className={`${styles.containerTitle} ${styles.titleInTheMain}`}
-                        >
-                            <span>Цена</span>
-                        </div>
-
-                        <div className={`${styles.range} ${styles.price}`}>
-                            <div className={styles.inputs}>
-                                <span>Oт</span>
-                                <label>
-                                    <input type="text" placeholder="0" />
-                                    <span>$</span>
-                                </label>
-                            </div>
-
-                            <div className={styles.inputs}>
-                                <span>До</span>
-                                <label>
-                                    <input type="text" placeholder={String(maxDiscountedPrice)} />
-                                    <span>$</span>
-                                </label>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className={styles.containerRange}>
-                        <div
-                            className={`${styles.containerTitle} ${styles.titleInTheMain}`}
-                        >
-                            <span>Процент скидки</span>
-                        </div>
-
-                        <div className={`${styles.range} ${styles.price}`}>
-                            <div className={styles.inputs}>
-                                <span>Oт</span>
-                                <label>
-                                    <input type="text" placeholder="0" />
-                                    <span>%</span>
-                                </label>
-                            </div>
-
-                            <div className={styles.inputs}>
-                                <span>До</span>
-                                <label>
-                                    <input type="text" placeholder="100" />
-                                    <span>%</span>
-                                </label>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className={styles.containerRange}>
-                        <div
-                            className={`${styles.containerTitle} ${styles.titleInTheMain}`}
-                        >
-                            <span>Процент положительных отзывов</span>
-                        </div>
-
-                        <div className={`${styles.range} ${styles.price}`}>
-                            <div className={styles.inputs}>
-                                <span>Oт</span>
-                                <label>
-                                    <input type="text" placeholder="0" />
-                                    <span>%</span>
-                                </label>
-                            </div>
-
-                            <div className={styles.inputs}>
-                                <span>До</span>
-                                <label>
-                                    <input type="text" placeholder="100" />
-                                    <span>%</span>
-                                </label>
-                            </div>
-                        </div>
-                    </section>
+                    <FilterModalRange
+                        symbol={"$"}
+                        title={"Цена"}
+                        textPlaceholder={["0", String(maxDiscountedPrice)]}
+                    />
+                    <FilterModalRange
+                        symbol={"%"}
+                        title={"% скидки"}
+                        textPlaceholder={["0", "100"]}
+                    />
+                    <FilterModalRange
+                        symbol={"%"}
+                        title={"% позитивных отзывов"}
+                        textPlaceholder={["0", "100"]}
+                    />
                 </main>
 
                 <footer>

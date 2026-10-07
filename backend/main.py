@@ -10,12 +10,12 @@ from tasks.scheduler import scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # task = asyncio.create_task(scheduler())
+    task = asyncio.create_task(scheduler())
     await connect_db()
 
     yield
 
-    # task.cancel()
+    task.cancel()
     await close_db()
 
 

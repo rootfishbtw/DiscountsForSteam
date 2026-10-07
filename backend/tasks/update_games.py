@@ -16,8 +16,6 @@ async def insert_page(conn, games):
             print(f'skip {game["title"]} - no steamAppID')
             continue
 
-        print(game)
-
         await conn.execute(
             '''
             insert into games (
@@ -50,7 +48,6 @@ async def insert_page(conn, games):
             round(float(game['savings'])),
             int(game['steamRatingPercent'])
         )
-        print(game['title'])
 
 
 async def get_page(client, pageNumber):
@@ -83,3 +80,5 @@ async def update_games():
                 'DELETE FROM games WHERE updated_at < $1',
                 started_at
             )
+
+    print('обновление завершено')
