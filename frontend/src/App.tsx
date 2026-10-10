@@ -10,7 +10,7 @@ import { useGames } from './hooks/useGames'
 
 function App() {
     const [page, setPage] = useState(1)
-    
+    const [previousPage, setPreviousPage] = useState(1)
 
     const [inputValue, setInputValue] = useState('')
     const [searchValue, setSearchValue] = useState('')
@@ -19,6 +19,10 @@ function App() {
     useEffect(() => {
         const timeOut = setTimeout(() => {
             setSearchValue(inputValue)
+            if (inputValue == '') {
+                return
+            }
+
             setPage(1)
         }, 500)
 
@@ -30,6 +34,7 @@ function App() {
     function onSetPage(action: number) {
         if (page + action > 0 && page + action < totalPage / 59) {
             setPage(page + action)
+            setPreviousPage(previousPage + action)
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         }
     }
@@ -40,6 +45,9 @@ function App() {
 
     function onChangeInputValue(event: React.ChangeEvent<HTMLInputElement>) {
         setInputValue(event.target.value)
+        if (event.target.value == '') {
+            setPage(previousPage)
+        }
     }
 
     return (
