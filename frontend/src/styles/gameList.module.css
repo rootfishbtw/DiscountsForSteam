@@ -10,3 +10,25 @@
   padding-inline: 20px;
   justify-content: center;
 }
+
+.gameListNoItem {
+  display: grid;
+  gap: 20px;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.noItem {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 30px;
+  width: 100%;
+  color: var(--fort-color-placeholder);
+  opacity: 0.2;
+}

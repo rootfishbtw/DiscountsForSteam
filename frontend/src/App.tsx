@@ -1,24 +1,36 @@
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from 'react'
 
-import Header from "./components/Header"
-import SearchGame from "./components/SearchGame"
-import GameList from "./components/GameList"
-import Pagination from "./components/Pagination"
-import GameSkeleton from "./components/GameSkeleton"
-import FilterModal from "./components/FilterModal"
+import Header from './components/Header'
+import SearchGame from './components/SearchGame'
+import GameList from './components/GameList'
+import Pagination from './components/Pagination'
+import GameSkeleton from './components/GameSkeleton'
 
-import { useGames } from "./hooks/useGames"
+import { useGames } from './hooks/useGames'
 
 function App() {
     const [page, setPage] = useState(1)
-    const [isFilterOpen, setIsFilterOpen] = useState(false)
+    
 
-    const { games, totalPage, loading, maxDiscountedPrice } = useGames(page)
+    const [inputValue, setInputValue] = useState('')
+    const [searchValue, setSearchValue] = useState('')
+    const { games, totalPage, loading } = useGames(page, searchValue)
+
+    useEffect(() => {
+        const timeOut = setTimeout(() => {
+            setSearchValue(inputValue)
+            setPage(1)
+        }, 500)
+
+        return () => {
+            clearTimeout(timeOut)
+        }
+    }, [inputValue])
 
     function onSetPage(action: number) {
         if (page + action > 0 && page + action < totalPage / 59) {
             setPage(page + action)
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         }
     }
 
@@ -26,16 +38,17 @@ function App() {
         e.preventDefault()
     }
 
-    function toggleFilters() {
-        setIsFilterOpen(!isFilterOpen)
+    function onChangeInputValue(event: React.ChangeEvent<HTMLInputElement>) {
+        setInputValue(event.target.value)
     }
 
     return (
         <>
-            <Header page={page}/>
+            <Header page={page} />
             <SearchGame
-                toggleFilters={toggleFilters}
                 handlerSubmit={handlerSubmit}
+                onChangeInputValue={onChangeInputValue}
+                inputValue={inputValue}
             />
 
             {loading ? <GameSkeleton /> : <GameList games={games} />}
@@ -44,13 +57,6 @@ function App() {
                 onSetPage={onSetPage}
                 page={page}
                 totalPage={totalPage}
-            />
-
-            <FilterModal
-                isOpen={isFilterOpen}
-                handlerSubmit={handlerSubmit}
-                toggleFilter={toggleFilters}
-                maxDiscountedPrice={maxDiscountedPrice}
             />
         </>
     )

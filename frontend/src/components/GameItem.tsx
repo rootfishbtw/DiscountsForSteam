@@ -1,6 +1,6 @@
-import styles from "../styles/gameItem.module.css"
-import fallbackImage from "../assets/fallbackImage.png"
-import type { Game } from "../types/game"
+import styles from '../styles/gameItem.module.css'
+import fallbackImage from '../assets/fallbackImage.png'
+import type { Game } from '../types/game'
 
 function GameItem({
     name,

@@ -1,6 +1,6 @@
-import styles from "../styles/gameList.module.css"
-import type { Game } from "../types/game"
-import GameItem from "./GameItem"
+import styles from '../styles/gameList.module.css'
+import type { Game } from '../types/game'
+import GameItem from './GameItem'
 
 interface GameListProps {
     games: Game[]
@@ -8,8 +8,9 @@ interface GameListProps {
 
 function GameList({ games }: GameListProps) {
     return (
-        <ul className={styles.gameList}>
-            {games.map((game) => (
+        <ul className={games.length ? styles.gameList : styles.gameListNoItem}>
+            {games.length
+                ? games.map((game) => (
                 <GameItem
                     key={game.steam_app_id}
                     name={game.name}
@@ -18,7 +19,9 @@ function GameList({ games }: GameListProps) {
                     url={game.url}
                     discount_percent={game.discount_percent}
                 />
-            ))}
+                ))
+                : <span className={styles.noItem}>¯\_(ツ)_/¯</span>
+            }
         </ul>
     )
 }

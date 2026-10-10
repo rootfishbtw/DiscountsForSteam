@@ -1,14 +1,22 @@
 import type { FormEvent } from 'react'
-import styles from "../styles/searchGame.module.css"
+import styles from '../styles/searchGame.module.css'
 
 interface SearchGameProps {
-    toggleFilters: () => void
     handlerSubmit: (e: FormEvent<HTMLFormElement>) => void
+    onChangeInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void
+    inputValue: string
 }
 
-function SearchGame({ toggleFilters, handlerSubmit}: SearchGameProps) {
+function SearchGame({
+    handlerSubmit,
+    onChangeInputValue,
+    inputValue,
+}: SearchGameProps) {
     return (
-        <form className={styles.formSearchGame} onSubmit={(e) => handlerSubmit(e)}>
+        <form
+            className={styles.formSearchGame}
+            onSubmit={(e) => handlerSubmit(e)}
+        >
             <label>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -26,10 +34,14 @@ function SearchGame({ toggleFilters, handlerSubmit}: SearchGameProps) {
                     <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                 </svg>
-                <input placeholder="Поиск игр..." />
+                <input
+                    placeholder="Поиск игр..."
+                    onChange={onChangeInputValue}
+                    value={inputValue}
+                />
             </label>
 
-            <button className={styles.btnOpenFilter} onClick={toggleFilters}>
+            <button className={styles.btnOpenFilter}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -53,7 +65,7 @@ function SearchGame({ toggleFilters, handlerSubmit}: SearchGameProps) {
                     <path d="M4 18l11 0" />
                     <path d="M19 18l1 0" />
                 </svg>
-                <span>Фильтры</span>
+                <span>Сортировка</span>
             </button>
         </form>
     )

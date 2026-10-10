@@ -1,4 +1,4 @@
-import styles from "../styles/pagination.module.css"
+import styles from '../styles/pagination.module.css'
 
 interface PaginationProps {
     onSetPage: (action: number) => void
@@ -36,7 +36,9 @@ function Pagination({ onSetPage, page, totalPage }: PaginationProps) {
 
             <button className={styles.arrow} onClick={() => onSetPage(1)}>
                 <span
-                    className={page + 1 < totalPage / 59 ? styles.active : undefined}
+                    className={
+                        page + 1 < totalPage / 59 ? styles.active : undefined
+                    }
                 >
                     Следующая
                 </span>
@@ -50,7 +52,9 @@ function Pagination({ onSetPage, page, totalPage }: PaginationProps) {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={page + 1 < totalPage / 59 ? styles.active : undefined}
+                    className={
+                        page + 1 < totalPage / 59 ? styles.active : undefined
+                    }
                 >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M5 12l14 0" />

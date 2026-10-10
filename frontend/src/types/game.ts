@@ -13,5 +13,4 @@ export interface GamesResponse {
     page: number
     limit: number
     total: number
-    max_discounted_price: number
 }

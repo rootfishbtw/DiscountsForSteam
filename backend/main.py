@@ -24,21 +24,21 @@ app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
 
 
-@app.get("/games")
+@app.get('/games')
 async def root(
     search: str | None = None,
     page: int = Query(1, ge=1),
     limit: int = Query(60, ge=1, le=60),
-):
+):   
     async with database.pool.acquire() as conn:
         games_record = await conn.fetch(
             """
@@ -52,24 +52,24 @@ async def root(
                 discount_percent,
                 steam_rating_percent
 			FROM games
+            WHERE ($2 = FALSE OR name % $1)
 			ORDER BY discounted_price DESC
-			LIMIT $1
-			OFFSET $2
+			LIMIT $3
+			OFFSET $4
 			""",
+            search,
+            bool(len(search)),
             limit,
             (page - 1) * limit,
         )
 
-        total = await conn.fetch("SELECT MAX(discounted_price), COUNT(*) FROM games")
-                
+        total = await conn.fetch('SELECT COUNT(*) FROM games WHERE ($2 = FALSE OR name % $1)', search, bool(len(search)))
 
     games = [dict(record) for record in games_record]
 
-
     return {
-        "games": games, 
-        "page": page, 
-        "limit": limit, 
-        "total": total[0]["count"],
-        "max_discounted_price": total[0]['max']
+        'games': games,
+        'page': page,
+        'limit': limit,
+        'total': total[0]['count'],
     }

@@ -1,4 +1,4 @@
-import styles from "../styles/gameSkeleton.module.css"
+import styles from '../styles/gameSkeleton.module.css'
 
 function GameSkeleton() {
     const el = []
