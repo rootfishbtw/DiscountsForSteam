@@ -5,12 +5,14 @@ interface SearchGameProps {
     handlerSubmit: (e: FormEvent<HTMLFormElement>) => void
     onChangeInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void
     inputValue: string
+    onSetIsOpenSort: () => void
 }
 
 function SearchGame({
     handlerSubmit,
     onChangeInputValue,
     inputValue,
+    onSetIsOpenSort,
 }: SearchGameProps) {
     return (
         <form
@@ -41,7 +43,7 @@ function SearchGame({
                 />
             </label>
 
-            <button className={styles.btnOpenFilter}>
+            <button onClick={onSetIsOpenSort} className={styles.btnOpenFilter}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

@@ -7,6 +7,7 @@ import Pagination from './components/Pagination'
 import GameSkeleton from './components/GameSkeleton'
 
 import { useGames } from './hooks/useGames'
+import Sorting from './components/sorting/Sorting'
 
 function App() {
     const [page, setPage] = useState(1)
@@ -14,15 +15,19 @@ function App() {
 
     const [inputValue, setInputValue] = useState('')
     const [searchValue, setSearchValue] = useState('')
-    const { games, totalPage, loading } = useGames(page, searchValue)
+
+    const [sortValue, setSortValue] = useState(1)
+    const [isOpenSort, setIsOpenSort] = useState(false)
+
+    const { games, totalPage, loading } = useGames(page, searchValue, sortValue)
+
+
+    console.log(sortValue)
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
             setSearchValue(inputValue)
-            if (inputValue == '') {
-                return
-            }
-
+            if (!inputValue) return
             setPage(1)
         }, 500)
 
@@ -43,11 +48,19 @@ function App() {
         e.preventDefault()
     }
 
-    function onChangeInputValue(event: React.ChangeEvent<HTMLInputElement>) {
-        setInputValue(event.target.value)
-        if (event.target.value == '') {
+    function onChangeInputValue(e: React.ChangeEvent<HTMLInputElement>) {
+        setInputValue(e.target.value)
+        if (e.target.value == '') {
             setPage(previousPage)
         }
+    }
+
+    function onSetIsOpenSort() {
+        setIsOpenSort(!isOpenSort)
+    }
+
+    function onSetSortValue(value: number) {
+        setSortValue(value)
     }
 
     return (
@@ -57,6 +70,7 @@ function App() {
                 handlerSubmit={handlerSubmit}
                 onChangeInputValue={onChangeInputValue}
                 inputValue={inputValue}
+                onSetIsOpenSort={onSetIsOpenSort}
             />
 
             {loading ? <GameSkeleton /> : <GameList games={games} />}
@@ -65,6 +79,13 @@ function App() {
                 onSetPage={onSetPage}
                 page={page}
                 totalPage={totalPage}
+            />
+
+            <Sorting
+                isOpenSort={isOpenSort}
+                onSetIsOpenSort={onSetIsOpenSort}
+                sortValue={sortValue}
+                onSetSortValue={onSetSortValue}
             />
         </>
     )

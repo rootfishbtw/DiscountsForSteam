@@ -17,6 +17,11 @@
   padding: 20px;
   background: transparent;
   border: none;
+  cursor: default;
+}
+
+.pagination .arrow.active {
+  cursor: pointer;
 }
 
 .pagination .arrow span {
@@ -25,19 +30,23 @@
   font-weight: 400;
   opacity: 0.2;
   color: var(--fort-color-placeholder);
+  cursor: default;
 }
 
 .pagination .arrow span.active {
   opacity: 1;
+  cursor: pointer;
 }
 
 .pagination .arrow svg {
   opacity: 0.2;
+  cursor: default;
   color: var(--fort-color-placeholder);
 }
 
 .pagination .arrow svg.active {
   opacity: 1;
+  cursor: pointer;
 }
 
 .pagination .countPage {

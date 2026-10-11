@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { fetchGames } from "../api/games"
 import type { Game } from "../types/game"
 
-export function useGames(page: number, search: string) {
+export function useGames(page: number, search: string, sort: number) {
     const [games, setGames] = useState<Game[]>([])
     const [totalPage, setTotalPage] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -12,7 +12,7 @@ export function useGames(page: number, search: string) {
             setLoading(true)
 
             try {
-                const data = await fetchGames(page, 60, search)
+                const data = await fetchGames(page, 60, search, sort)
 
                 setGames(data.games)
                 setTotalPage(data.total)
@@ -22,7 +22,7 @@ export function useGames(page: number, search: string) {
         }
 
         loadGames()
-    }, [page, search])
+    }, [page, search, sort])
 
     return {
         games,

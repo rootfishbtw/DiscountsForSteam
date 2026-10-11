@@ -10,12 +10,12 @@ from tasks.scheduler import scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    task = asyncio.create_task(scheduler())
+    #task = asyncio.create_task(scheduler())
     await connect_db()
 
     yield
 
-    task.cancel()
+    #task.cancel()
     await close_db()
 
 
@@ -32,33 +32,46 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
+sort_type = {
+    1: 'discounted_price DESC',
+    2: 'discounted_price ASC',
+    3: 'discount_percent DESC',
+    4: 'discount_percent ASC',
+    5: 'steam_rating_percent DESC',
+    6: 'steam_rating_percent ASC',
+}
 
 @app.get('/games')
 async def root(
     search: str | None = None,
+    sort: int = Query(1, ge=1, le=6),
     page: int = Query(1, ge=1),
     limit: int = Query(60, ge=1, le=60),
-):   
+):
+    order_by_clause = sort_type[sort]
+    
+    has_search = bool(search and search.strip())
+
     async with database.pool.acquire() as conn:
         games_record = await conn.fetch(
-            """
-			SELECT 
-				steam_app_id,
-				name, 
-				price, 
-				discounted_price,
-				updated_at,
-                url,
-                discount_percent,
-                steam_rating_percent
-			FROM games
-            WHERE ($2 = FALSE OR name % $1)
-			ORDER BY discounted_price DESC
-			LIMIT $3
-			OFFSET $4
-			""",
+            f"""
+            SELECT  
+                steam_app_id, 
+                name,  
+                price,  
+                discounted_price, 
+                updated_at, 
+                url, 
+                discount_percent, 
+                steam_rating_percent 
+            FROM games 
+            WHERE ($2 = FALSE OR name % $1) 
+            ORDER BY {order_by_clause} 
+            LIMIT $3 
+            OFFSET $4
+            """,
             search,
-            bool(len(search)),
+            has_search,
             limit,
             (page - 1) * limit,
         )

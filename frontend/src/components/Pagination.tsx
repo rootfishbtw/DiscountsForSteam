@@ -9,7 +9,7 @@ interface PaginationProps {
 function Pagination({ onSetPage, page, totalPage }: PaginationProps) {
     return (
         <section className={styles.pagination}>
-            <button className={styles.arrow} onClick={() => onSetPage(-1)}>
+            <button className={`${styles.arrow} ${page - 1 <= 0 ? undefined : styles.active}`} onClick={() => onSetPage(-1)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -34,7 +34,7 @@ function Pagination({ onSetPage, page, totalPage }: PaginationProps) {
 
             <div className={styles.countPage}>{page}</div>
 
-            <button className={styles.arrow} onClick={() => onSetPage(1)}>
+            <button className={`${styles.arrow} ${page + 1 < totalPage / 59 ? styles.active : undefined}`} onClick={() => onSetPage(1)}>
                 <span
                     className={
                         page + 1 < totalPage / 59 ? styles.active : undefined
