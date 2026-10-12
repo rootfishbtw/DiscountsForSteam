@@ -3,7 +3,7 @@ import asyncio
 import database
 from datetime import datetime, timezone
 
-PROXY = 'http://10.111.176.227:10809' # это только для меня
+PROXY = 'http://10.148.28.217:10809' # это только для меня
 HTTPX_TIMEOUT = 30
 BASE_URL = 'https://www.cheapshark.com/api/1.0/deals'
 PAGE_SIZE = 60

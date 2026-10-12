@@ -18,6 +18,8 @@ function GameList({ games }: GameListProps) {
                     discounted_price={game.discounted_price}
                     url={game.url}
                     discount_percent={game.discount_percent}
+                    steam_rating_percent={game.steam_rating_percent}
+                    steam_app_id={game.steam_app_id}
                 />
                 ))
                 : <span className={styles.noItem}>¯\_(ツ)_/¯</span>

@@ -1,11 +1,11 @@
 export interface Game {
-    steam_app_id?: number
+    steam_app_id: number
     name: string
     price: number
     discounted_price: number
     url: string
     discount_percent: number
-    steam_rating_percent?: number
+    steam_rating_percent: number
 }
 
 export interface GamesResponse {
