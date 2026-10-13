@@ -32,3 +32,20 @@
   color: var(--fort-color-placeholder);
   opacity: 0.2;
 }
+
+@media (max-width: 620px) {
+  .gameList {
+    gap: 12px;
+    padding-inline: 12px;
+  }
+
+  .gameListNoItem {
+    gap: 20px;
+    padding-inline: 12px;
+    padding: 12px;
+  }
+
+  .noItem {
+    font-size: 20px;
+  }
+}

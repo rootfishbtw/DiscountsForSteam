@@ -58,3 +58,23 @@
   border-radius: 7px;
   border: 1px solid var(--br-header);
 }
+
+@media (max-width: 620px) {
+  .pagination .arrow {
+    padding: 20px 12px;
+  }
+
+  .pagination .arrow span {
+    display: none;
+  }
+
+  .pagination .countPage {
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--fort-color-placeholder);
+    padding: 8px;
+    border-radius: 7px;
+    border: 1px solid var(--br-header);
+  }
+}

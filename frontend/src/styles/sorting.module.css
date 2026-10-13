@@ -2,7 +2,7 @@
   position: fixed;
   opacity: 0;
   visibility: hidden;
-  background: var(--bg-shadow-modal);
+  background: var(--color-shadow-modal);
   backdrop-filter: blur(15px);
   top: 0;
   left: 0;
@@ -27,7 +27,7 @@
   z-index: 800;
   display: flex;
   flex-direction: column;
-  background: var(--bg-li-info);
+  background: var(--bg-body-item);
   border: 1px solid var(--br-input);
   border-radius: 14px;
   width: 400px;
@@ -75,4 +75,33 @@
 
 .separator {
   border-bottom: 1px solid var(--br-input);
+}
+
+@media (max-width: 620px) {
+  .containerSorting {
+    backdrop-filter: blur(10px);
+  }
+  .form {
+    box-shadow: 0 0 15px #000000a6;
+    width: 290px;
+  }
+
+  .header {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .items {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .item {
+    gap: 7px;
+    cursor: pointer;
+  }
+
+  .item span {
+    font-size: 14px;
+  }
 }

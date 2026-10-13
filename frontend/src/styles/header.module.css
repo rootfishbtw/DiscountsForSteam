@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--bg-header);
+  background-color: var(--bg-body-header);
   border: 1px solid var(--br-header);
   display: flex;
   justify-content: center;
@@ -27,4 +27,27 @@
   padding: 10px;
   border-radius: 7px;
   border: 1px solid var(--br-header);
+}
+
+.iconLogo {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 620px) {
+  .header div {
+    font-size: 13px;
+  }
+
+  .iconLogo {
+    width: 17px;
+    height: 17px;
+  }
+
+  .header span {
+    top: 9px;
+    right: 12px;
+    font-size: 13px;
+    padding: 8px;
+  }
 }

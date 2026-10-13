@@ -11,10 +11,11 @@
   gap: 20px;
   max-width: 1500px;
   z-index: 400;
+  box-sizing: border-box;
 }
 
 .formSearchGame label {
-  background-color: var(--bg-input);
+  background-color: var(--bg-body-input);
   border: 1px solid var(--br-input);
   backdrop-filter: blur(50px);
   border-radius: 7px;
@@ -45,23 +46,64 @@
   color: var(--fort-color-placeholder);
 }
 
-.formSearchGame .btnOpenFilter {
+.btnOpenFilter {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 15px;
   box-sizing: border-box;
-  background-color: var(--bg-input);
+  background-color: var(--bg-body-input);
   border: 1px solid var(--br-input);
   backdrop-filter: blur(50px);
   border-radius: 7px;
   cursor: pointer;
 }
 
-.formSearchGame .btnOpenFilter span {
+.btnOpenFilter span {
   font-family: inter;
   font-weight: 600;
   font-size: 14px;
   outline: none;
   color: var(--font-color-def);
+}
+
+.iconSearch {
+  color: #828e9c;
+  width: 24px;
+}
+
+.iconSort {
+  width: 24px;
+  color: #e0e5eb;
+}
+
+@media (max-width: 620px) {
+  .btnOpenFilter span {
+    display: none;
+  }
+
+  .formSearchGame {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .formSearchGame label {
+    padding: 15px;
+    gap: 7px;
+  }
+
+  .iconSearch,
+  .iconSort {
+    width: 19px;
+    height: 19px;
+  }
+
+  .formSearchGame label input {
+    font-size: 13px;
+    min-width: 10px;
+  }
+
+  .btnOpenFilter {
+    padding: 15px;
+  }
 }

@@ -1,22 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --bg: #091016;
-  --bg-header: #0c151c;
+  --bg-body: #091016;
+
+  --bg-body-header: #0c151c;
   --br-header: #151e27;
 
-  --bg-accent: #1c62dc;
+  --bg-body-accent: #1c62dc;
 
-  --bg-li-info: #121a25;
+  --bg-body-item: #121a25;
 
   --font-color-def: #e0e5eb;
   --fort-color-placeholder: #828e9c;
   --font-color-accent: #4bc064;
 
-  --bg-input: #141c27b7;
+  --bg-body-input: #141c27b7;
   --br-input: #252e3775;
 
-  --bg-shadow-modal: #091016c5; 
+  --color-shadow-modal: #091016c5;
 }
 
 #root {
