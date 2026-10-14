@@ -43,3 +43,10 @@
     transform: translateX(100%);
   }
 }
+
+@media (max-width: 620px) {
+  .skeletonGames {
+    gap: 15px;
+    padding-inline: 15px;
+  }
+}

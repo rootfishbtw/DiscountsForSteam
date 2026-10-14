@@ -81,3 +81,25 @@ li a img {
   padding: 5px;
   border-top-left-radius: 7px;
 }
+
+@media (max-width: 620px) {
+  .info {
+    gap: 8px;
+  }
+  .info .title {
+    font-size: 13px;
+  }
+
+  .info .containerPrice .price span {
+    font-size: 13px;
+  }
+
+  .info .containerPrice .price del {
+    font-size: 11px;
+  }
+
+  .discountpercent {
+    font-size: 12px;
+    padding: 5px;
+  }
+}

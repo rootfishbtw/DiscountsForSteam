@@ -10,8 +10,9 @@ from tasks.scheduler import scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    task = asyncio.create_task(scheduler())
+
     await connect_db()
+    task = asyncio.create_task(scheduler())
 
     yield
 
@@ -41,8 +42,12 @@ sort_type = {
     6: 'steam_rating_percent ASC',
 }
 
+@app.get('/ping') 
+async def ping():
+    return {'ok'}
+
 @app.get('/games')
-async def root(
+async def games(
     search: str | None = None,
     sort: int = Query(1, ge=1, le=6),
     page: int = Query(1, ge=1),

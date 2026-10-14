@@ -61,7 +61,7 @@
 
 @media (max-width: 620px) {
   .pagination .arrow {
-    padding: 20px 12px;
+    padding: 20px 15px;
   }
 
   .pagination .arrow span {

@@ -48,6 +48,7 @@ async def insert_page(conn, games):
             round(float(game['savings'])),
             int(game['steamRatingPercent'])
         )
+        print(game['title'])
 
 
 async def get_page(client, pageNumber):
@@ -64,7 +65,7 @@ async def update_games():
     print('update_games')
     started_at = datetime.now(timezone.utc)
 
-    async with httpx.AsyncClient(headers={'User-Agent': 'SteamDeals/1.0'}, proxy=PROXY, timeout=HTTPX_TIMEOUT) as client:
+    async with httpx.AsyncClient(headers={'User-Agent': 'SteamDeals/1.0'}, timeout=HTTPX_TIMEOUT) as client:
         response = await get_page(client, 0)
         total_pages = int(response.headers['X-Total-Page-Count'])
 
