@@ -43,9 +43,9 @@ sort_type = {
     6: 'steam_rating_percent ASC',
 }
 
-@app.get('/ping') 
+@app.api_route('/ping', methods=["GET", "HEAD"]) 
 async def ping():
-    return {'ok'}
+    return {'status': 'ok'}
 
 @app.get('/games')
 async def games(
