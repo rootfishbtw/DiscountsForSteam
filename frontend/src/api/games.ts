@@ -4,7 +4,7 @@ export async function fetchGames(
     page: number,
     limit: number,
     search: string,
-    sort: number
+    sort: number,
 ): Promise<GamesResponse> {
     const response = await fetch(
         `https://discountsforsteam.onrender.com/games?page=${page}&limit=${limit}&search=${search}&sort=${sort}`,

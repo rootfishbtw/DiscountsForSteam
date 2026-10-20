@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from contextlib import asynccontextmanager
 
 import database
@@ -6,6 +7,11 @@ from database import close_db, connect_db
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from tasks.scheduler import scheduler
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s    [%(levelname)s]    %(message)s',
+)
 
 
 @asynccontextmanager
@@ -43,19 +49,21 @@ sort_type = {
     6: 'steam_rating_percent ASC',
 }
 
-@app.api_route('/ping', methods=["GET", "HEAD"]) 
+
+@app.api_route('/ping', methods=['GET', 'HEAD'])
 async def ping():
     return {'status': 'ok'}
 
+
 @app.get('/games')
 async def games(
-    search: str | None = None,
+    search: str = '',
     sort: int = Query(1, ge=1, le=6),
     page: int = Query(1, ge=1),
     limit: int = Query(60, ge=1, le=60),
 ):
     order_by_clause = sort_type[sort]
-    
+
     has_search = bool(search and search.strip())
 
     async with database.pool.acquire() as conn:
@@ -82,7 +90,11 @@ async def games(
             (page - 1) * limit,
         )
 
-        total = await conn.fetch('SELECT COUNT(*) FROM games WHERE ($2 = FALSE OR name % $1)', search, bool(len(search)))
+        total = await conn.fetch(
+            'SELECT COUNT(*) FROM games WHERE ($2 = FALSE OR name % $1)',
+            search,
+            bool(len(search)),
+        )
 
     games = [dict(record) for record in games_record]
 
